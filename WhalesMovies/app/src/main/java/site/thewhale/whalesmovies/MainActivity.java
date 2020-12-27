@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +15,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        RecyclerView
+                ParentRecyclerViewItem
+                = findViewById(
+                R.id.parent_recyclerview);
+
+            LinearLayoutManager
+                    layoutManager
+                    = new LinearLayoutManager(
+                    MainActivity.this);
+
+            ParentItemAdapter
+                    parentItemAdapter
+                    = new ParentItemAdapter(
+                    ParentItemList());
+
+            ParentRecyclerViewItem
+                    .setAdapter(parentItemAdapter);
+            ParentRecyclerViewItem
+                    .setLayoutManager(layoutManager);
+
 
         ArrayList<Movies> moviesArrayList = new ArrayList<Movies>();
         moviesArrayList.add(
@@ -46,5 +68,33 @@ public class MainActivity extends AppCompatActivity {
 
         MovieAdapter movieAdapter = new MovieAdapter(moviesArrayList, MainActivity.this);
         rView.setAdapter(movieAdapter);
+    }
+
+    private List<ParentItem> ParentItemList()
+    {
+        List<ParentItem> itemList
+                = new ArrayList<>();
+
+        ParentItem item
+                = new ParentItem(
+                "Harry Potter's Movies Series",
+                ChildItemList());
+        itemList.add(item);
+
+
+        return itemList;
+    }
+
+    private List<ChildItem> ChildItemList()
+    {
+        List<ChildItem> ChildItemList
+                = new ArrayList<>();
+
+        ChildItemList.add(new ChildItem("Part 1", R.drawable.hpa));
+        ChildItemList.add(new ChildItem("Part 2", R.drawable.hpb));
+        ChildItemList.add(new ChildItem("Part 3", R.drawable.hpc));
+        ChildItemList.add(new ChildItem("Part 4",R.drawable.hpd));
+
+        return ChildItemList;
     }
 }
